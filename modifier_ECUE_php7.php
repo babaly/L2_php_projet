@@ -34,7 +34,7 @@ if (isset($_GET['NUMMATIERE'])){
 						$rep = mysqli_query($conn, "SELECT NUMNIVEAU, LIBELLENIVEAU FROM niveau WHERE NUMNIVEAU=$niveau");
 						$data = mysqli_fetch_array($rep);
 
-						echo '<option value="">'.$data['LIBELLENIVEAU'].'</option>';
+						echo '<option value="'.$data['NUMNIVEAU'].'">'.$data['LIBELLENIVEAU'].'</option>';
 						$reponse1 = mysqli_query($conn, "SELECT DISTINCT NUMNIVEAU, LIBELLENIVEAU FROM niveau ORDER BY LIBELLENIVEAU");
 
 		                foreach ($reponse1 as $reponse1) {
@@ -60,7 +60,7 @@ if (isset($_GET['NUMMATIERE'])){
 
 						$data = mysqli_fetch_array($reponse);
               
-						echo '<option value="">'.$data['LIBELLEMODULE'].'</option>';
+						echo '<option value="'.$data['NUMMODULE'].'">'.$data['LIBELLEMODULE'].'</option>';
 						$reponse2 = mysqli_query($conn, "SELECT DISTINCT LIBELLEMODULE, NUMMODULE FROM module ORDER BY LIBELLEMODULE");
 		                foreach ($reponse2 as $reponse2) {
 						$reponss = $reponse2['LIBELLEMODULE'];	
@@ -81,7 +81,7 @@ if (isset($_GET['NUMMATIERE'])){
 
 						$data = mysqli_fetch_array($reponse);
               
-						echo '<option value="">'.$data['LIBELLESEMESTRE'].'</option>';
+						echo '<option value="'.$data['NUMSEMESTRE'].'">'.$data['LIBELLESEMESTRE'].'</option>';
 						$reponse3 = mysqli_query($conn, "SELECT DISTINCT LIBELLESEMESTRE, NUMSEMESTRE FROM semestre ORDER BY LIBELLESEMESTRE");
 		                foreach ($reponse3 as $reponse3) {
 						$reponss = $reponse3['LIBELLESEMESTRE'];	

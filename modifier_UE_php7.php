@@ -34,12 +34,12 @@ if (isset($_GET['NUMMODULE'])){
 						$rep = mysqli_query($conn, "SELECT NUMNIVEAU, LIBELLENIVEAU FROM niveau WHERE NUMNIVEAU=$niveau");
 						$data = mysqli_fetch_array($rep);
 
-						echo '<option value="">'.$data['LIBELLENIVEAU'].'</option>';
+						echo '<option value="'.$data['NUMNIVEAU'].'">'.$data['LIBELLENIVEAU'].'</option>';
 						$reponse = mysqli_query($conn, "SELECT DISTINCT NUMNIVEAU, LIBELLENIVEAU FROM niveau ORDER BY LIBELLENIVEAU");
 
 		                foreach ($reponse as $reponse) {
 						$reponss = $reponse['LIBELLENIVEAU'];	
-						echo '<option value="'.$_GET['NUMMODULE'].'">'.$reponss.'</option>';
+						echo '<option value="'.$reponse['NUMNIVEAU'].'">'.$reponss.'</option>';
 		               	}
 		                ?>
                   </select>
@@ -55,16 +55,16 @@ if (isset($_GET['NUMMODULE'])){
 						include ('config.php');
 						$conn = mysqli_connect($sql_serveur, $sql_user, $sql_passwd, $sql_bdd) or die("Impossible de se connecter à la base mysql");
 
-						$reponse = mysqli_query($conn, "SELECT DISTINCT LIBELLESEMESTRE, NUMSEMESTRE FROM semestre WHERE NUMSEMESTRE=$semestre");
+						$reponse1 = mysqli_query($conn, "SELECT DISTINCT LIBELLESEMESTRE, NUMSEMESTRE FROM semestre WHERE NUMSEMESTRE=$semestre");
 
 
-						$data = mysqli_fetch_array($reponse);
+						$data = mysqli_fetch_array($reponse1);
               
-						echo '<option value="">'.$data['LIBELLESEMESTRE'].'</option>';
-						$reponse = mysqli_query($conn, "SELECT DISTINCT LIBELLESEMESTRE, NUMSEMESTRE FROM semestre ORDER BY LIBELLESEMESTRE");
-		                foreach ($reponse as $reponse) {
-						$reponss = $reponse['LIBELLESEMESTRE'];	
-						echo '<option value="'.$_GET['NUMMODULE'].'">'.$reponss.'</option>';
+						echo '<option value="'.$data['NUMSEMESTRE'].'">'.$data['LIBELLESEMESTRE'].'</option>';
+						$reponse2 = mysqli_query($conn, "SELECT DISTINCT LIBELLESEMESTRE, NUMSEMESTRE FROM semestre ORDER BY LIBELLESEMESTRE");
+		                foreach ($reponse2 as $reponse2) {
+						$reponss = $reponse2['LIBELLESEMESTRE'];	
+						echo '<option value="'.$reponse2['NUMSEMESTRE'].'">'.$reponss.'</option>';
 		               	}
 		                ?>
                   </select>
