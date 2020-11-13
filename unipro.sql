@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 09 nov. 2020 à 16:26
+-- Généré le :  ven. 13 nov. 2020 à 19:57
 -- Version du serveur :  10.1.38-MariaDB
 -- Version de PHP :  7.3.3
 
@@ -21,6 +21,31 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `unipro`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `absence`
+--
+
+CREATE TABLE `absence` (
+  `NUMABSENCE` int(11) NOT NULL,
+  `NUMSEMESTRE` int(11) NOT NULL,
+  `NUMNIVEAU` int(11) NOT NULL,
+  `NUMMATIERE` int(11) NOT NULL,
+  `NUMETUDIANT` int(11) NOT NULL,
+  `TYPE` varchar(255) NOT NULL,
+  `LIBELLE` varchar(255) NOT NULL,
+  `date_SAVE` date NOT NULL,
+  `HEURE` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `absence`
+--
+
+INSERT INTO `absence` (`NUMABSENCE`, `NUMSEMESTRE`, `NUMNIVEAU`, `NUMMATIERE`, `NUMETUDIANT`, `TYPE`, `LIBELLE`, `date_SAVE`, `HEURE`) VALUES
+(1, 2, 6, 4, 1, 'Retard', 'retard de 15 minute', '2020-11-13', '8h-12h');
 
 -- --------------------------------------------------------
 
@@ -43,7 +68,7 @@ CREATE TABLE `enseignant` (
 
 INSERT INTO `enseignant` (`NUMENSEIGNANT`, `pseudo`, `passe`, `PRENOMENSEIGNANT`, `NOMENSEIGNANT`, `NUMMATIERE`) VALUES
 (1, 'AL_AMEEN', 'P@sser1', 'Baba', 'NGOM', '1'),
-(2, 'musa@diagne', 'P@sser2', 'Moussa', 'DIAGNE', '1'),
+(2, 'musa@diagne', 'P@sser2', 'Moussa', 'DIAGNE', '4'),
 (3, 'Nulk@', 'P@sser3', 'Mamadou Baba ', 'LY', '1'),
 (4, 'lamine@lahi', 'Passer4', 'Mamadou Lamine', 'DRAME', '1');
 
@@ -71,8 +96,12 @@ CREATE TABLE `etudiant` (
 --
 
 INSERT INTO `etudiant` (`NUMETUDIANT`, `NUMNIVEAU`, `PRENOMETUDIANT`, `NOMETUDIANT`, `DATENAISSANCE`, `LIEUNAISSANCE`, `ADRESSE`, `SEXE`, `TELPORT`, `EMAIL`) VALUES
-(1, 6, 'Fallou', 'wade', '2002-11-30', 'Thies', 'Medina, rue 4 x 12', 'Masculin', '778987744', ' fallouwade@gmail.com'),
-(2, 6, 'Jean', 'Gomis', '2001-12-12', 'Pikine', 'Pikine Icotaf, villa 18', 'Masculin', '775231244', ' jeangomis@gmail.com');
+(6, 6, 'Aissatou', 'SENE', '2003-02-02', 'Bambey', 'Rue 10, Grand Dakar', 'FÃ©minin', '774589665', 'aissatousene@gmail.com'),
+(1, 6, 'Jean', 'Gomis', '2001-12-12', 'Pikine', 'Pikine Icotaf, villa 18', 'Masculin', '775231244', ' jeangomis@gmail.com'),
+(5, 6, 'Fallou', 'wade', '2002-11-30', 'Thies', 'Medina, rue 4 x 12', 'Masculin', '778987744', ' fallouwade@gmail.com'),
+(7, 7, 'Assane', 'SECK', '2002-03-22', 'Saint-Louis', 'Diamaguene Ouest', 'Masculin', '339875654', 'assaneseck@gmail.com'),
+(8, 7, 'Fatou', 'SOW', '2002-02-28', 'Dakar', 'Dakar-Fann, villa 50', 'FÃ©minin', '775698788', 'fatousow@gmail.com'),
+(9, 7, 'SÃ©raphin', 'Coly', '2002-11-11', 'Bignona', 'Plateau, rue 24', 'Masculin', '776592144', 's_coly@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -94,7 +123,9 @@ CREATE TABLE `matiere` (
 --
 
 INSERT INTO `matiere` (`NUMMATIERE`, `NUMMODULE`, `NUMSEMESTRE`, `NUMNIVEAU`, `LIBELLEMATIERE`, `COEF`) VALUES
-(1, 2, 4, 9, 'Anglais', '5');
+(1, 2, 4, 9, 'Anglais', '5'),
+(3, 3, 2, 6, 'UML', '4'),
+(4, 3, 2, 6, 'PHP', '5');
 
 -- --------------------------------------------------------
 
@@ -162,6 +193,18 @@ CREATE TABLE `note` (
   `TYPE` text
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `note`
+--
+
+INSERT INTO `note` (`NUMNOTE`, `NOTE`, `NUMMATIERE`, `NUMETUDIANT`, `NUMSEMESTRE`, `TYPE`) VALUES
+(1, '14', NULL, NULL, NULL, NULL),
+(2, '14', 1, NULL, 3, '1'),
+(3, '14', 1, NULL, 3, '1'),
+(4, '14', 1, NULL, 3, '1'),
+(6, '18', 1, 1, 3, '1'),
+(7, '17', 1, 1, 3, '1');
+
 -- --------------------------------------------------------
 
 --
@@ -219,6 +262,12 @@ INSERT INTO `utilisateur` (`IDLOGIN`, `LOGIN`, `PASSWORD`, `TYPE`) VALUES
 --
 -- Index pour les tables déchargées
 --
+
+--
+-- Index pour la table `absence`
+--
+ALTER TABLE `absence`
+  ADD PRIMARY KEY (`NUMABSENCE`);
 
 --
 -- Index pour la table `enseignant`
@@ -286,6 +335,12 @@ ALTER TABLE `utilisateur`
 --
 
 --
+-- AUTO_INCREMENT pour la table `absence`
+--
+ALTER TABLE `absence`
+  MODIFY `NUMABSENCE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT pour la table `enseignant`
 --
 ALTER TABLE `enseignant`
@@ -295,13 +350,13 @@ ALTER TABLE `enseignant`
 -- AUTO_INCREMENT pour la table `etudiant`
 --
 ALTER TABLE `etudiant`
-  MODIFY `NUMETUDIANT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `NUMETUDIANT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `matiere`
 --
 ALTER TABLE `matiere`
-  MODIFY `NUMMATIERE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `NUMMATIERE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `module`
@@ -319,7 +374,7 @@ ALTER TABLE `niveau`
 -- AUTO_INCREMENT pour la table `note`
 --
 ALTER TABLE `note`
-  MODIFY `NUMNOTE` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `NUMNOTE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `semestre`

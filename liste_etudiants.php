@@ -28,9 +28,9 @@ $req1 = mysqli_query($conn, "SELECT NUMETUDIANT,NUMNIVEAU,PRENOMETUDIANT,NOMETUD
 $data1 = mysqli_fetch_array($req1);
 $niveau = $data1['NUMNIVEAU'];
 
-$req2 = mysqli_query($conn, "SELECT NUMNIVEAU,LIBELLENIVEAU FROM niveau WHERE NUMNIVEAU=$niveau");
+//$req2 = mysqli_query($conn, "SELECT NUMNIVEAU,LIBELLENIVEAU FROM niveau WHERE NUMNIVEAU=$niveau");
 
-$data2 = mysqli_fetch_array($req2);
+//$data2 = mysqli_fetch_array($req2);
 
 foreach ($req1 as $row) :
    
